@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Member sign-in · JNVH Alumni</title>
+<style>
+  :root { color-scheme:dark; background:#101410; color:#f7f5e9; font:1rem/1.55 system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  body { margin:0; }
+  main { width:min(32rem,calc(100% - 2rem)); margin:clamp(2rem,8vw,7rem) auto; }
+  a { color:#eac788; text-underline-offset:.22em; }
+  h1 { font:500 clamp(2.5rem,8vw,4.5rem)/1.05 Georgia,serif; letter-spacing:-.04em; margin:1.5rem 0 .75rem; }
+  p { color:#c9d0c2; overflow-wrap:anywhere; }
+  form, #member { background:#192119; border:1px solid #414a40; border-radius:.8rem; padding:clamp(1rem,4vw,2rem); margin-top:1.5rem; }
+  label { display:block; margin-bottom:1rem; font-weight:650; }
+  input { display:block; width:100%; margin-top:.35rem; border:1px solid #687566; border-radius:.35rem; background:#101410; color:inherit; padding:.65rem; font:inherit; }
+  button { border:0; border-radius:99px; background:#eac788; color:#211b11; padding:.7rem 1.15rem; font:750 1rem system-ui,sans-serif; cursor:pointer; }
+  button:disabled { opacity:.6; cursor:wait; }
+  :focus-visible { outline:2px solid #eac788; outline-offset:4px; }
+</style>
+</head>
+<body>
+<main>
+  <a href="./">← JNVH Alumni home</a>
+  <h1>Member sign-in</h1>
+  <p id="intro">Use your existing JNVH Alumni email and password.</p>
+  <p id="feedback" role="status">Connecting to member sign-in…</p>
+  <form id="login" hidden>
+    <label>Email <input id="email" type="email" autocomplete="username" required></label>
+    <label>Password <input id="password" type="password" autocomplete="current-password" required></label>
+    <button type="submit">Sign in</button>
+  </form>
+  <section id="member" aria-labelledby="account-title" hidden>
+    <h2 id="account-title">Your membership</h2>
+    <p id="account"></p>
+    <p id="approval" role="status"></p>
+    <button id="logout" type="button">Sign out</button>
+  </section>
+  <p>Need help with your account? Email <a href="mailto:admin@jnvhalumni.com">admin@jnvhalumni.com</a>.</p>
+  <noscript>Enable JavaScript to sign in.</noscript>
+</main>
+<script>setTimeout(() => { const status = document.querySelector('#feedback'); if (status.textContent.startsWith('Connecting')) status.textContent = 'Sign-in is unavailable. Please reload to try again.'; }, 12000);</script>
+<script type="module" src="./members.js"></script>
+</body>
+</html>
