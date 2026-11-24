@@ -25,6 +25,7 @@
 <main class="wrap member-main" id="main">
   <h1>Member sign-in</h1>
   <p id="intro">Use your existing JNVH Alumni email and password.</p>
+  <p id="admin-entry"><a href="./members.html?mode=admin">Admin sign-in</a></p>
   <p id="feedback" role="status">Connecting to member sign-in…</p>
   <form class="member-panel" id="login" hidden>
     <label>Email <input id="email" type="email" autocomplete="username" required></label>
@@ -35,6 +36,16 @@
     <h2 id="account-title">Your membership</h2>
     <p id="account"></p>
     <p id="approval" role="status"></p>
+    <div id="admin-tools" hidden>
+      <h3>Manage JNVH Alumni</h3>
+      <p>These tools open on the main site, where you may be asked to sign in again.</p>
+      <ul>
+        <li><a href="https://jnvhalumni.com/admin/registrations">View member registrations and details</a></li>
+        <li><a href="https://jnvhalumni.com/admin/inbox">View reunion registrations in the inbox</a></li>
+        <li><a href="https://jnvhalumni.com/admin/resources">Manage curated gallery photos</a></li>
+        <li><a href="https://jnvhalumni.com/admin/events">Manage events</a></li>
+      </ul>
+    </div>
     <button class="pill" id="logout" type="button">Sign out</button>
   </section>
   <p>Need help with your account? Email <a href="mailto:admin@jnvhalumni.com">admin@jnvhalumni.com</a>.</p>
