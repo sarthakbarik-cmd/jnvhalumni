@@ -87,3 +87,20 @@ footer { border-top: 1px solid var(--line); color: var(--muted); font-size: .83r
   .reveal[data-pending]:focus-within { opacity: 1; transform: none; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .pill { transition: none; } }
+
+.page-intro { padding-block: clamp(3rem, 8vw, 6rem) clamp(1.75rem, 4vw, 3rem); }
+.page-intro h1 { margin: .18em 0 .16em; font-size: clamp(3.3rem, 7vw, 6.4rem); }
+.page-intro p:not(.eyebrow) { max-width: 52ch; font-size: clamp(1rem, 1.8vw, 1.18rem); }
+.page-content { padding-bottom: clamp(3rem, 8vw, 6rem); }
+.editorial-panel { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.3rem, 5vw, 4rem); padding: clamp(1.25rem, 5vw, 3.75rem); border: 1px solid var(--line); border-radius: var(--radius); background: var(--sage); }
+.editorial-panel h2 { font-size: clamp(2.35rem, 5vw, 4.2rem); margin-top: .2em; }
+.editorial-panel dl { margin: 0; }
+.editorial-panel dl div { padding-block: .55rem; border-bottom: 1px solid #abb9ab; }
+.editorial-panel dl div:first-child { padding-top: 0; }
+.editorial-panel dt { color: var(--clay); font-size: .78rem; font-weight: 750; text-transform: uppercase; letter-spacing: .095em; }
+.editorial-panel dd { margin: .12rem 0 0; }
+.editorial-panel p:not(.eyebrow) { margin-top: .75rem; max-width: 45ch; }
+.page-links { display: flex; flex-wrap: wrap; gap: .65rem 1.3rem; align-items: center; margin-top: 1.5rem; }
+.page-links a:not(.pill), footer a { color: var(--clay); }
+.reunion .pill { margin-top: .85rem; }
+@media (max-width: 720px) { .editorial-panel { grid-template-columns: 1fr; } }
