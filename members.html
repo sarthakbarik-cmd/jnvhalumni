@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex">
 <title>Member sign-in · JNVH Alumni</title>
 <link rel="stylesheet" href="./brand.css">
+<link rel="stylesheet" href="./admin.css">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -37,14 +38,32 @@
     <p id="account"></p>
     <p id="approval" role="status"></p>
     <div id="admin-tools" hidden>
-      <h3>Manage JNVH Alumni</h3>
-      <p>These tools open on the main site, where you may be asked to sign in again.</p>
-      <ul>
-        <li><a href="https://jnvhalumni.com/admin/registrations">View member registrations and details</a></li>
-        <li><a href="https://jnvhalumni.com/admin/inbox">View reunion registrations in the inbox</a></li>
-        <li><a href="https://jnvhalumni.com/admin/resources">Manage curated gallery photos</a></li>
-        <li><a href="https://jnvhalumni.com/admin/events">Manage events</a></li>
-      </ul>
+      <nav class="admin-cards" aria-label="Administration tools">
+        <button class="admin-card" type="button" data-tool="members"><strong>Members</strong><span>Review member registration details</span></button>
+        <button class="admin-card" type="button" data-tool="reunion"><strong>Reunion registrations</strong><span>Review attendees and meal preferences</span></button>
+        <button class="admin-card" type="button" data-tool="gallery"><strong>Gallery</strong><span>Publish a curated photo</span></button>
+        <button class="admin-card" type="button" data-tool="events"><strong>Events</strong><span>Create and review association events</span></button>
+      </nav>
+      <section id="admin-workspace" class="admin-workspace" aria-labelledby="admin-tool-title" hidden>
+        <h3 id="admin-tool-title"></h3>
+        <p id="admin-result" role="status"></p>
+        <form class="admin-form" id="admin-gallery" hidden>
+          <label>Photo <input name="photo" type="file" accept="image/jpeg,image/png,image/webp" required></label>
+          <label>Caption <input name="caption" maxlength="250" required></label>
+          <label>Event or album <input name="album" maxlength="100" required></label>
+          <label class="admin-check"><input name="featured" type="checkbox"> Feature this photo</label>
+          <button class="pill" type="submit">Publish photo</button>
+        </form>
+        <form class="admin-form" id="admin-events" hidden>
+          <label>Event name <input name="title" maxlength="120" required></label>
+          <label>Date <input name="date" type="date" required></label>
+          <label>Description <textarea name="description" maxlength="2000" rows="4" required></textarea></label>
+          <p>New events are saved to the shared Firebase calendar.</p>
+          <button class="pill" type="submit">Create event</button>
+        </form>
+        <div id="admin-records"></div>
+        <button class="pill" id="admin-more" type="button" hidden>Load more</button>
+      </section>
     </div>
     <button class="pill" id="logout" type="button">Sign out</button>
   </section>
