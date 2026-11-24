@@ -1,0 +1,17 @@
+.member-main:has(#admin-tools:not([hidden])) { max-width: var(--width); }
+.admin-cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,12rem),1fr)); gap: .75rem; margin-block: 1.4rem; }
+.admin-card { text-align: left; border: 1px solid var(--line); border-radius: var(--radius); background: var(--paper); color: var(--ink); padding: 1rem; cursor: pointer; font: inherit; min-height: 6.5rem; }
+.admin-card:hover, .admin-card[aria-pressed="true"] { background: var(--sage); border-color: #8fa096; }
+.admin-card strong, .admin-card span { display: block; }
+.admin-card strong { font: 700 1.25rem var(--display); }
+.admin-card span { color: var(--muted); font-size: .85rem; margin-top: .35rem; }
+.admin-workspace { border-top: 1px solid var(--line); padding-block: 1rem; }
+.admin-workspace h3 { font: 600 1.55rem var(--display); }
+.admin-form { max-width: 36rem; margin-block: 1rem; }
+.admin-form textarea { display: block; width: 100%; margin-top: .3rem; padding: .6rem .7rem; font: inherit; color: var(--ink); background: var(--paper); border: 1px solid #8fa096; border-radius: .45rem; }
+.admin-form .admin-check { display: flex; gap: .5rem; }
+.admin-form .admin-check input { width: auto; }
+.admin-form p { margin-bottom: .75rem; }
+#admin-records { display: grid; gap: .65rem; margin-block: 1rem; }
+.admin-record { padding: .75rem 1rem; border: 1px solid var(--line); border-radius: .6rem; overflow-wrap: anywhere; }
+.admin-record p { margin-top: .15rem; white-space: pre-wrap; }
