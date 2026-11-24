@@ -8,7 +8,7 @@ import {
 } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js';
 import { doc, getDocFromServer, getFirestore } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js';
 
-const app = initializeApp({"apiKey": "AIzaSyCgXCmP1FW8qrGt1cV0btOi98sVDzkel3E", "authDomain": "studio-8216248509-d2d60.firebaseapp.com", "projectId": "studio-8216248509-d2d60", "appId": "1:712802627768:web:5487f13e15e583382cc44d"});
+const app = initializeApp({"apiKey": "AIzaSyCgXCmP1FW8qrGt1cV0btOi98sVDzkel3E", "authDomain": "studio-8216248509-d2d60.firebaseapp.com", "projectId": "studio-8216248509-d2d60", "appId": "1:712802627768:web:5487f13e15e583382cc44d", "storageBucket": "studio-8216248509-d2d60.appspot.com"});
 const auth = initializeAuth(app, { persistence: browserSessionPersistence });
 const db = getFirestore(app);
 const form = document.querySelector('#login');
@@ -22,6 +22,7 @@ const logout = document.querySelector('#logout');
 const intro = document.querySelector('#intro');
 const adminEntry = document.querySelector('#admin-entry');
 const adminTools = document.querySelector('#admin-tools');
+let adminDashboard;
 const adminMode = new URLSearchParams(location.search).get('mode') === 'admin';
 
 if (adminMode) {
@@ -41,6 +42,7 @@ const membershipLabels = new Map([
 
 onAuthStateChanged(auth, async (user) => {
   adminTools.hidden = true;
+  adminDashboard?.clear();
   form.hidden = Boolean(user);
   intro.hidden = Boolean(user);
   member.hidden = !user;
@@ -54,7 +56,13 @@ onAuthStateChanged(auth, async (user) => {
     if (auth.currentUser !== user) return;
     const access = record.data();
     const isAdmin = access?.role === 'admin';
-    adminTools.hidden = !isAdmin;
+    if (isAdmin) {
+      const { createAdminDashboard } = await import('./admin.js');
+      if (auth.currentUser !== user) return;
+      adminDashboard ??= createAdminDashboard(app, db, auth);
+      adminDashboard.open(user);
+      adminTools.hidden = false;
+    }
     if (adminMode) {
       approval.textContent = isAdmin
         ? 'Administrator access confirmed.'
