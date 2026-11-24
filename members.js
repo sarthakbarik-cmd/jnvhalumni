@@ -20,6 +20,18 @@ const approval = document.querySelector('#approval');
 const feedback = document.querySelector('#feedback');
 const logout = document.querySelector('#logout');
 const intro = document.querySelector('#intro');
+const adminEntry = document.querySelector('#admin-entry');
+const adminTools = document.querySelector('#admin-tools');
+const adminMode = new URLSearchParams(location.search).get('mode') === 'admin';
+
+if (adminMode) {
+  document.title = 'Admin sign-in · JNVH Alumni';
+  document.querySelector('h1').textContent = 'Admin sign-in';
+  document.querySelector('#account-title').textContent = 'Association administration';
+  intro.textContent = 'Use your existing Firebase administrator account.';
+  adminEntry.querySelector('a').href = './members.html';
+  adminEntry.querySelector('a').textContent = 'Back to member sign-in';
+}
 
 const membershipLabels = new Map([
   ['approved', 'Your membership is approved.'],
@@ -28,18 +40,28 @@ const membershipLabels = new Map([
 ]);
 
 onAuthStateChanged(auth, async (user) => {
+  adminTools.hidden = true;
   form.hidden = Boolean(user);
   intro.hidden = Boolean(user);
   member.hidden = !user;
   feedback.textContent = '';
   account.textContent = user?.email ?? '';
-  approval.textContent = user ? 'Checking your membership…' : '';
+  approval.textContent = user ? 'Checking your account access…' : '';
   if (!user) return;
 
   try {
     const record = await getDocFromServer(doc(db, 'userStatus', user.uid));
     if (auth.currentUser !== user) return;
-    approval.textContent = membershipLabels.get(record.data()?.status)
+    const access = record.data();
+    const isAdmin = access?.role === 'admin';
+    adminTools.hidden = !isAdmin;
+    if (adminMode) {
+      approval.textContent = isAdmin
+        ? 'Administrator access confirmed.'
+        : 'This account does not have administrator access.';
+      return;
+    }
+    approval.textContent = membershipLabels.get(access?.status)
       ?? 'We could not find an approval status for this account. Contact the association for help.';
   } catch {
     if (auth.currentUser !== user) return;
